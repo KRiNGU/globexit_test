@@ -1,9 +1,8 @@
-import './reset.sass';
 import { createRoot } from 'react-dom/client';
-import App from './App';
+import Cards from './views/Cards/Cards';
 
 const rootNode = document.getElementById('root');
 
 if (rootNode) {
-  createRoot(rootNode).render(<App />);
+  createRoot(rootNode).render(<Cards />);
 }
