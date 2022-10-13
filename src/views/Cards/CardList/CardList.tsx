@@ -5,13 +5,18 @@ import styles from './styles.module.sass';
 
 export interface ICardList {
   users: User[];
+  onCardClick: (user: User) => void;
 }
 
-const CardList = ({ users }: ICardList) => {
+const CardList = ({ users, onCardClick }: ICardList) => {
   return (
     <div className={styles.cards}>
       {users.map((user, index) => (
-        <UserCard user={user} key={index} />
+        <UserCard
+          user={user}
+          key={index}
+          onCardClick={() => onCardClick(user)}
+        />
       ))}
     </div>
   );

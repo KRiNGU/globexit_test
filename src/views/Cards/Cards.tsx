@@ -1,19 +1,46 @@
 import '../../reset.sass';
-import { memo, useCallback, useEffect, useState } from 'react';
+import React, { memo, useCallback, useEffect, useRef, useState } from 'react';
 import UserCard from '../../components/UserCard';
 import { User } from '../../models/user';
 import { getUsers } from '../../api/user';
 import CardList from './CardList';
 import styles from './styles.module.sass';
+import CustomInput from '../../components/CustomInput';
+import CardModal from '../../components/CardModal';
 
 const Cards: React.FC = () => {
   const [users, setUsers] = useState<User[]>([]);
+  const [search, setSearch] = useState<string>('');
+  const [isModalOpened, setIsModalOpened] = useState<boolean>(false);
+  const [modalUser, setModalUser] = useState<User>(users[0]);
+
   useEffect(() => {
-    getUsers().then((response) => setUsers(response.data));
+    getUsers(search).then((response) => setUsers(response.data));
+  }, [search]);
+
+  const handleClick = useCallback((value: string) => {
+    setSearch(value);
   }, []);
+
+  const handleOpenModal = useCallback(
+    (user: User) => {
+      setModalUser(user);
+      setIsModalOpened(true);
+    },
+    [setIsModalOpened, setModalUser]
+  );
+
+  const handleCloseModal = useCallback(() => {
+    setIsModalOpened(false);
+  }, [setIsModalOpened]);
+
   return (
     <div className={styles.container}>
-      <CardList users={users.slice(0, 3)} />
+      {isModalOpened && (
+        <CardModal user={modalUser} onClose={handleCloseModal} />
+      )}
+      <CustomInput onClick={handleClick} />
+      <CardList users={users} onCardClick={handleOpenModal} />
     </div>
   );
 };

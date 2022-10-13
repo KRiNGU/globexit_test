@@ -1,9 +1,29 @@
 .card
     border-radius: 5px
-    box-shadow: 0 0 2px 2px rgba(0, 0, 0, 0.1)
-    padding: 20px
+    box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.05)
+    padding: 20px 20px 100px 20px
     display: flex
     flex-direction: column
+    cursor: pointer
+    transition: box-shadow .1s
+    &:hover
+        box-shadow: 0 0 5px 5px rgba(0, 0, 0, 0.2)
+
+.userInfoBlock
+    display: flex
+    flex-direction: column
+    margin-top: 40px
 
 .userInfo
     color: grey
+    display: flex
+    align-items: center
+
+.userInfoText
+    margin-left: 10px
+
+.userInfoEmail
+    overflow: hidden
+    text-overflow: ellipsis
+    &:hover
+        color: #ffc1f0
