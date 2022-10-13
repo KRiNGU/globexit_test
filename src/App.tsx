@@ -1,15 +1,8 @@
-import React, { useCallback, useState } from 'react';
+import './reset.sass';
+import { useCallback, useState } from 'react';
+import UserCard from './components/UserCard';
 const App: React.FC = () => {
-  const [count, setCount] = useState<number>(0);
-  const onCountClick = useCallback(() => {
-    setCount((prev) => prev + 1);
-  }, []);
-  return (
-    <>
-      <h1>Count: {count}</h1>
-      <button onClick={onCountClick}>Add</button>
-    </>
-  );
+  return <></>;
 };
 
 export default App;
